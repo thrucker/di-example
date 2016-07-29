@@ -5,8 +5,8 @@ userAndPoReadServiceFactory = (_userReadService = userReadService, _poReadServic
     service = {}
 
     service.getUserAndPo = (userId, poId) ->
-        user = _userReadService userId
-        po = _poReadService poId
+        user = _userReadService.getUser userId
+        po = _poReadService.getPo poId
 
         return {user, po}
 

@@ -1,4 +1,4 @@
-bucket = require 'couchbase'
+bucket = require './db/bucket'
 
 readServiceFactory = (_bucket = bucket) ->
     service = {}

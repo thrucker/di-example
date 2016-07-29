@@ -1,7 +1,7 @@
 {readService} = require './read-service'
-UserModel = require 'user-model'
+UserModel = require './models/user-model'
 
-poReadServiceFactory = (_readService = readService) ->
+userReadServiceFactory = (_readService = readService) ->
     service = {}
 
     service.getUser = (id) ->
