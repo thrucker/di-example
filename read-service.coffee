@@ -1,4 +1,4 @@
-readServiceFactory = (_bucket = bucket) ->
+readServiceFactory = (_bucket) ->
     service = {}
 
     service.getDocument = (id) ->

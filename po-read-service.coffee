@@ -1,4 +1,4 @@
-PoModel = require 'po-model'
+PoModel = require './models/po-model'
 
 poReadServiceFactory = (_readService) ->
     service = {}

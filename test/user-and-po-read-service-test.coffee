@@ -1,11 +1,15 @@
+InMemBucket = require '../db/in-mem-bucket'
+{expect} = require 'chai'
+
 describe 'userAndPoReadService', ->
     userAndPoReadService = null
+    bucket = null
 
     beforeEach ->
         bucket = new InMemBucket()
-        container = require '../di-container'
+        container = require '../di/container'
 
-        container.register bucket, 'bucket'
+        container.register 'bucket', bucket
 
         userAndPoReadService = container.get 'user-and-po-read-service'
 
@@ -15,5 +19,5 @@ describe 'userAndPoReadService', ->
 
         {user, po} = userAndPoReadService.getUserAndPo 'userid', 'poid'
 
-        expect(user.name).to.equal 'foo'
-        expect(po.name).to.equal 'bar'
+        expect(user.name()).to.equal 'foo'
+        expect(po.name()).to.equal 'bar'

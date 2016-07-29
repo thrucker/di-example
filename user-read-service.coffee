@@ -1,6 +1,6 @@
-UserModel = require 'user-model'
+UserModel = require './models/user-model'
 
-poReadServiceFactory = (_readService = readService) ->
+userReadServiceFactory = (_readService) ->
     service = {}
 
     service.getUser = (id) ->
@@ -9,6 +9,6 @@ poReadServiceFactory = (_readService = readService) ->
 
     return service
 
-poReadServiceFactory.$inject = ['read-service']
+userReadServiceFactory.$inject = ['read-service']
 
-module.exports = poReadServiceFactory
+module.exports = userReadServiceFactory
