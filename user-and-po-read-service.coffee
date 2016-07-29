@@ -1,7 +1,7 @@
 {poReadService} = require './po-read-service'
 {userReadService} = require './user-read-service'
 
-userAndPoReadServiceFactory = (_poReadService = poReadService, _userReadService = userReadService) ->
+userAndPoReadServiceFactory = (_userReadService = userReadService, _poReadService = poReadService) ->
     service = {}
 
     service.getUserAndPo = (userId, poId) ->
