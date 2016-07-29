@@ -12,6 +12,6 @@ userAndPoReadServiceFactory = (_userReadService = userReadService, _poReadServic
 
     return service
 
-module.exports =
-    userAndPoReadService: userAndPoReadServiceFactory()
-    userAndPoReadServiceFactory: userAndPoReadServiceFactory
+userAndPoReadServiceFactory.$inject = ['user-read-service', 'po-read-service']
+
+module.exports = userAndPoReadServiceFactory

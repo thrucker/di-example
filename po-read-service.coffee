@@ -1,7 +1,6 @@
-{readService} = require './read-service'
 PoModel = require 'po-model'
 
-poReadServiceFactory = (_readService = readService) ->
+poReadServiceFactory = (_readService) ->
     service = {}
 
     service.getPo = (id) ->
@@ -10,6 +9,6 @@ poReadServiceFactory = (_readService = readService) ->
 
     return service
 
-module.exports =
-    poReadService: poReadServiceFactory()
-    poReadServiceFactory: poReadServiceFactory
+poReadServiceFactory.$inject = ['read-service']
+
+module.exports = poReadServiceFactory

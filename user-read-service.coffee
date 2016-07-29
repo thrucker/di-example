@@ -1,4 +1,3 @@
-{readService} = require './read-service'
 UserModel = require 'user-model'
 
 poReadServiceFactory = (_readService = readService) ->
@@ -10,6 +9,6 @@ poReadServiceFactory = (_readService = readService) ->
 
     return service
 
-module.exports =
-    userReadService: userReadServiceFactory()
-    userReadServiceFactory: userReadServiceFactory
+poReadServiceFactory.$inject = ['read-service']
+
+module.exports = poReadServiceFactory

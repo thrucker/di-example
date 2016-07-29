@@ -1,5 +1,3 @@
-bucket = require 'couchbase'
-
 readServiceFactory = (_bucket = bucket) ->
     service = {}
 
@@ -8,6 +6,6 @@ readServiceFactory = (_bucket = bucket) ->
 
     return service
 
-module.exports =
-    readService: readServiceFactory()
-    readServiceFactory: readServiceFactory
+readServiceFactory.$inject = ['bucket']
+
+module.exports = readServiceFactory

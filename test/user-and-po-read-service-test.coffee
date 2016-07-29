@@ -3,16 +3,11 @@ describe 'userAndPoReadService', ->
 
     beforeEach ->
         bucket = new InMemBucket()
+        container = require '../di-container'
 
-        {readServiceFactory} = require '../read-service'
-        {poReadServiceFactory} = require '../po-read-service'
-        {userReadServiceFactory} = require '../user-read-service'
-        {userAndPoReadServiceFactory} = require '../user-and-po-read-service'
+        container.register bucket, 'bucket'
 
-        readService = readServiceFactory bucket
-        poReadService = poReadServiceFactory readService
-        userReadService = userReadServiceFactory readService
-        userAndPoReadService = userAndPoReadServiceFactory userReadService, poReadService
+        userAndPoReadService = container.get 'user-and-po-read-service'
 
     it 'should return user and po', ->
         bucket.set 'userid', {name: 'foo', type: 'user'}
