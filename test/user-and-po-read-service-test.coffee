@@ -1,22 +1,16 @@
 InMemBucket = require '../db/in-mem-bucket'
 {expect} = require 'chai'
 
-describe 'userAndPoReadService', ->
+describe 'UserAndPoReadService', ->
     userAndPoReadService = null
     bucket = null
 
     beforeEach ->
         bucket = new InMemBucket()
 
-        {readServiceFactory} = require '../read-service'
-        {poReadServiceFactory} = require '../po-read-service'
-        {userReadServiceFactory} = require '../user-read-service'
-        {userAndPoReadServiceFactory} = require '../user-and-po-read-service'
+        UserAndPoReadService = require '../user-and-po-read-service'
 
-        readService = readServiceFactory bucket
-        poReadService = poReadServiceFactory readService
-        userReadService = userReadServiceFactory readService
-        userAndPoReadService = userAndPoReadServiceFactory userReadService, poReadService
+        userAndPoReadService = UserAndPoReadService {bucket}
 
     it 'should return user and po', ->
         bucket.set 'userid', {name: 'foo', type: 'user'}
@@ -26,3 +20,37 @@ describe 'userAndPoReadService', ->
 
         expect(user.name()).to.equal 'foo'
         expect(po.name()).to.equal 'bar'
+
+describe 'PoReadService', ->
+    poReadService = null
+    bucket = null
+
+    beforeEach ->
+        bucket = new InMemBucket()
+
+        PoReadService = require '../po-read-service'
+        poReadService = PoReadService {bucket}
+
+    it 'should return a PO', ->
+        bucket.set 'poid', {name: 'bar', type: 'po'}
+
+        po = poReadService.getPo 'poid'
+
+        expect(po.name()).to.equal 'bar'
+
+describe 'UserReadService', ->
+    userReadService = null
+    bucket = null
+
+    beforeEach ->
+        bucket = new InMemBucket()
+
+        UserReadService = require '../user-read-service'
+        userReadService = UserReadService {bucket}
+
+    it 'should return a PO', ->
+        bucket.set 'userid', {name: 'foo', type: 'user'}
+
+        user = userReadService.getUser 'userid'
+
+        expect(user.name()).to.equal 'foo'

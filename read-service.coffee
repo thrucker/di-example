@@ -1,13 +1,10 @@
+stampit = require 'stampit'
 bucket = require './db/bucket'
 
-readServiceFactory = (_bucket = bucket) ->
-    service = {}
+ReadService = stampit
+    methods:
+        getDocument: (id) ->
+            return @bucket.get id
+    refs: {bucket}
 
-    service.getDocument = (id) ->
-        return _bucket.get id
-
-    return service
-
-module.exports =
-    readService: readServiceFactory()
-    readServiceFactory: readServiceFactory
+module.exports = ReadService

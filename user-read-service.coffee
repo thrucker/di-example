@@ -1,15 +1,12 @@
-{readService} = require './read-service'
+stampit = require 'stampit'
+ReadService = require './read-service'
 UserModel = require './models/user-model'
 
-userReadServiceFactory = (_readService = readService) ->
-    service = {}
+UserReadService = stampit
+    methods:
+        getUser: (id) ->
+            doc = @getDocument id
+            return new UserModel doc
+.compose ReadService
 
-    service.getUser = (id) ->
-        doc = _readService.getDocument id
-        return new UserModel doc
-
-    return service
-
-module.exports =
-    userReadService: userReadServiceFactory()
-    userReadServiceFactory: userReadServiceFactory
+module.exports = UserReadService

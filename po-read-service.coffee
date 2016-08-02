@@ -1,15 +1,12 @@
-{readService} = require './read-service'
+stampit = require 'stampit'
+ReadService = require './read-service'
 PoModel = require './models/po-model'
 
-poReadServiceFactory = (_readService = readService) ->
-    service = {}
+PoReadService = stampit
+    methods:
+        getPo: (id) ->
+            doc = @getDocument id
+            return new PoModel doc
+.compose ReadService
 
-    service.getPo = (id) ->
-        doc = _readService.getDocument id
-        return new PoModel doc
-
-    return service
-
-module.exports =
-    poReadService: poReadServiceFactory()
-    poReadServiceFactory: poReadServiceFactory
+module.exports = PoReadService

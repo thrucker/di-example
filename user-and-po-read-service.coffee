@@ -1,17 +1,14 @@
-{poReadService} = require './po-read-service'
-{userReadService} = require './user-read-service'
+stampit = require 'stampit'
+PoReadService = require './po-read-service'
+UserReadService = require './user-read-service'
 
-userAndPoReadServiceFactory = (_userReadService = userReadService, _poReadService = poReadService) ->
-    service = {}
+UserAndPoReadService = stampit
+    methods:
+        getUserAndPo: (userId, poId) ->
+            user = @getUser userId
+            po = @getPo poId
 
-    service.getUserAndPo = (userId, poId) ->
-        user = _userReadService.getUser userId
-        po = _poReadService.getPo poId
+            return {user, po}
+.compose PoReadService, UserReadService
 
-        return {user, po}
-
-    return service
-
-module.exports =
-    userAndPoReadService: userAndPoReadServiceFactory()
-    userAndPoReadServiceFactory: userAndPoReadServiceFactory
+module.exports = UserAndPoReadService
